@@ -1,32 +1,40 @@
 import './App.css';
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Box from '@material-ui/core/Box'
-import Container from '@material-ui/core/Container'
-import InputForm from './Components/InputForm'
 import logo from './assets/Trend Invest.svg'
 import { makeStyles } from '@material-ui/core/styles'
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import { red } from '@material-ui/core/colors';
-import TypeWriterEffect from 'react-typewriter-effect';
+import { AnimateOnChange } from 'react-animation'
+import Landing from './Screens/landing'
+import Results from './Components/Results'
 
 const useStyles = makeStyles((theme) => ({
   logo: {
-
+    alignSelf: 'start'
   },
   body: {
-    paddingLeft: theme.spacing(40),
-    paddingRight: theme.spacing(40)
+    display: 'flex',
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'column'
   },
   card: {
     display: 'flex',
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    flexDirection: 'column'
   },
   title: {
     color: 'white',
     textAlign: 'center'
+  },
+  animateWrapper: {
+    display: 'flex',
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   }
 }))
 
@@ -36,29 +44,23 @@ function App() {
     document.body.style.backgroundColor = '#1652F0'
   }, [])
 
+  const [data, setData] = useState(null)
+  const [isLoading, setIsLoading] = useState(false)
   const classes = useStyles()
-  const myRef = document.querySelector('.scrollable-div')
 
   return (
-    <div>
+    <div className={classes.body}>
       <img src={logo} width='200' height='200' className={classes.logo}/>
-      <Container className={classes.body}>
-        <TypeWriterEffect
-              textStyle={{ fontFamily: 'Red Hat Display', color: 'white', textAlign: 'center' }}
-              startDelay={100}
-              cursorColor="white"
-              text="Predict. Research. Invest."
-              typeSpeed={100}
-              hideCursorAfterText={true}
-              scrollArea={myRef}
-              className={classes.title}
-            />
-          <Box pt={10} className={classes.card}>
-            <InputForm className={classes.form}/>
-          </Box>
-      </Container>
+      <AnimateOnChange>
+        {data != null ? 
+          <Box className={classes.card}>
+            <Results onClear={setData} data={data} />
+          </Box> 
+          : 
+          <Landing setData={setData} isLoading={isLoading} setIsLoading={setIsLoading} />}
+      </AnimateOnChange>
     </div>
-    );
+  );
 }
 
 export default App;
