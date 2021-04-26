@@ -44,11 +44,11 @@ const Landing = ({setData, setIsLoading, isLoading}) => {
                 textStyle={{ fontFamily: 'Red Hat Display', color: 'white', textAlign: 'center' }}
                 startDelay={100}
                 cursorColor="white"
-                multiText={["Give me one second...",
+                multiText={["Generating a prediction...",
                 "this usually takes around 15-30 seconds...",
                 "however, since I'm collecting realtime data,",
                 "it'll take longer if multiple users want predictions.",
-                "Reddit & Twitter have some pretty strict request limits.",
+                "Reddit & Twitter have strict scraping limitations.",
                 "Hang tight. I'm still working."
                 ]}
                 typeSpeed={50}

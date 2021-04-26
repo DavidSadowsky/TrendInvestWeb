@@ -90,7 +90,7 @@ const InputForm = ({setData, setIsLoading}) => {
             />
             <Box className={classes.submit} pt={2}>
                 <BootstrapButton disabled={selection === ''} onClick={() => getPrediction()}>
-                    SUBMIT
+                    Submit
                 </BootstrapButton>
             </Box>
         </form>

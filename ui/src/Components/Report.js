@@ -191,7 +191,7 @@ const Report = ({data, onClear}) => {
                             style={{ color: data.prediction == 'Bearish' ? 'red' : 'green'}}>
                                 {' ' + data.prediction + ' '}
                         </span> 
-                    with a confidence level of 
+                    for the next week with a confidence level of 
                         <span 
                             style={{ color: data.confidence > .80 ? 'green' : data.confidence < .65 ? 'red' : 'orange'}}>
                                     {' ' + (data.confidence*100).toFixed(2)}%
