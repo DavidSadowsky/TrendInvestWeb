@@ -1,7 +1,7 @@
 import React from 'react'
 import { makeStyles, withStyles } from '@material-ui/core/styles'
 import Box from '@material-ui/core/Box'
-import { LineChart, XAxis, CartesianGrid, Line, Tooltip, YAxis, Legend } from 'recharts'
+import { LineChart, XAxis, CartesianGrid, Line, Tooltip, YAxis } from 'recharts'
 import Button from '@material-ui/core/Button'
 
 const useStyles = makeStyles((theme) => ({
@@ -66,7 +66,6 @@ const BootstrapButton = withStyles({
 
 const Report = ({data, onClear}) => {
     const classes = useStyles()
-    console.log(data.misc.Reddit_mentions_last_week)
     const reddit_mentions = [
         { 
             "name": "4",
@@ -188,7 +187,7 @@ const Report = ({data, onClear}) => {
                 <center>
                     I've predicted that {data.misc.name} is
                         <span 
-                            style={{ color: data.prediction == 'Bearish' ? 'red' : 'green'}}>
+                            style={{ color: data.prediction === 'Bearish' ? 'red' : 'green'}}>
                                 {' ' + data.prediction + ' '}
                         </span> 
                     for the next week with a confidence level of 

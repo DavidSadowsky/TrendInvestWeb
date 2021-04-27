@@ -71,13 +71,35 @@ const InputForm = ({setData, setIsLoading}) => {
 
     const getPrediction = () => {
       setIsLoading(true)
-      fetch('/predict?coinName=' + selection, {
-        method: "GET"
+      fetch('https://davidsadowsky.github.io/TrendInvestCrypto/process?coinName=' + selection, {
+        method: "GET",
+        mode: "cors"
       }).then(res => res.json().then(data => {
-        setData(data.data)
+        console.log(data)
+        var predictInterval = setInterval(async function() {
+          fetch('https://davidsadowsky.github.io/TrendInvestCrypto/predict?coinName=' + selection, {
+          method: "GET",
+          mode: "cors"
+          }).then(res => res.json().then(data => {
+            if (data.data !== 'Job processing') {
+              setData(data.data)
+              setIsLoading(false)
+              clearInterval(predictInterval)
+            }
+            else {
+              console.log(data)
+            }
+          }).catch((error) => {
+            console.error('Error:', error)
+            setIsLoading(false)
+          })
+        )}, 2000)
+      }).catch((error) => {
+        console.error('Error:', error)
         setIsLoading(false)
       })
-    )}
+      )
+    }
 
     return (
         <form className={classes.form}>
